@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"="width=device-width, initial-scale=1.0">
+    <title>商户后台管理</title>
+    <link rel="stylesheet" href="merchant-styles.css">
+</head>
+
+<body>
+<header>
+    <h1>商户后台管理</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="#" onclick="showSection('manage-menus')">管理菜单</a></li>
+        <li><a href="#" onclick="showSection('manage-tables')">管理桌位</a></li>
+        <li><a href="#" onclick="showSection('manage-orders')">管理订单</a></li>
+        <li><a href="#" onclick="showSection('manage-suppliers')">供应商管理</a></li>
+        <li><a href="#" onclick="showSection('manage-inventory')">库存管理</a></li>
+    </ul>
+</nav>
+<main id="main-content">
+    <!-- 管理菜单页面 -->
+    <section id="manage-menus" class="section">
+        <h2>管理菜单</h2>
+        <div id="menu-category-list"></div>
+        <form id="add-menu-category-form">
+            <label for="category-name">菜单分类名称：</label>
+            <input type="text" id="category-name" required><br>
+            <input type="submit" value="添加分类" onclick="addMenuCategory()">
+        </form>
+        <div id="menu-list"></div>
+        <form id="add-menu-form">
+            <label for="dish-name">菜品名称：</label>
+            <input type="text" id="dish-name" required><br>
+            <label for="price">价格：</label>
+            <input type="number" step="0.01" id="price" required><br>
+            <label for="stock">库存：</label>
+            <input type="number" id="stock" required><br>
+            <label for="availability">是否可用：</label>
+            <input type="checkbox" id="availability"><br>
+            <label for="category-id">所属分类：</label>
+            <select id="category-id" required></select><br>
+            <input type="submit" value="添加菜品" onclick="addMenu()">
+        </form>
+    </section>
+    <!-- 管理桌位页面 -->
+    <section id="manage-tables" class="section" style="display: none;">
+        <h2>管理桌位</h2>
+        <div id="table-list"></div>
+        <form id="add-table-form">
+            <label for="table-capacity">桌位容量：</label>
+            <input type="number" id="table-capacity" required><br>
+            <label for="is-available">是否可用：</label>
+            <input type="checkbox" id="is-available"><br>
+            <input type="submit" value="添加桌位" onclick="addTable()">
+        </form>
+        <div id="reservation-list"></div>
+        <form id="add-reservation-form">
+            <label for="customer-name">顾客姓名：</label>
+            <input type="text" id="customer-name" required><br>
+            <label for="phone-number">联系电话：</label>
+            <input type="text" id="phone-number" required><br>
+            <label for="reservation-time">预订时间：</label>
+            <input type="datetime-local" id="reservation-time" required><br>
+            <label for="table-id">桌位 ID：</label>
+            <select id="table-id" required></select><br>
+            <input type="submit" value="添加预订" onclick="addReservation()">
+        </form>
+        <div id="queue-list"></div>
+        <form id="add-queue-form">
+            <label for="queue-customer-name">顾客姓名：</label>
+            <input type="text" id="queue-customer-name" required><br>
+            <label for="queue-phone-number">联系电话：</label>
+            <input type="text" id="queue-phone-number" required><br>
+            <input type="submit" value="添加排号" onclick="addQueue()">
+        </form>
+    </section>
+    <!-- 管理订单页面 -->
+    <section id="manage-orders" class="section" style="display: none;">
+        <h2>管理订单</h2>
+        <div id="order-list"></div>
+        <form id="process-order-form">
+            <label for="order-id">订单 ID：</label>
+            <input type="text" id="order-id" required><br>
+            <label for="payment-status">支付状态：</label>
+            <select id="payment-status" required>
+                <option value="未支付">未支付</option>
+                <option value="已支付">已支付</option>
+            </select><br>
+            <label for="order-status">订单状态：</label>
+            <select id="order-status" required>
+                <option value="待处理">待处理</option>
+                <option value="已处理">已处理</option>
+            </select><br>
+            <input type="submit" value="处理订单" onclick="processOrder()">
+        </form>
+        <button onclick="generateInvoice()">开具发票</button>
+    </section>
+    <!-- 供应商管理页面 -->
+    <section id="manage-suppliers" class="section" style="display: none;">
+        <h2>供应商管理</h2>
+        <div id="supplier-list"></div>
+        <form id="add-supplier-form">
+            <label for="supplier-name">供应商名称：</label>
+            <input type="text" id="supplier-name" required><br>
+            <label for="contact-person">联系人：</label>
+            <input type="text" id="contact-person" required><br>
+            <label for="contact-phone">联系电话：</label>
+            <input type="text" id="contact-phone" required><br>
+            <input type="submit" value="添加供应商" onclick="addSupplier()">
+        </form>
+    </section>
+    <!-- 库存管理页面 -->
+    <section id="manage-inventory" class="section" style="display: none;">
+        <h2>库存管理</h2>
+        <div id="ingredient-list"></div>
+        <form id="add-ingredient-form">
+            <label for="ingredient-name">食材名称：</label>
+            <input type="text" id="ingredient-name" required><br>
+            <label for="ingredient-stock">库存数量：</label>
+            <input type="number" id="ingredient-stock" required><br>
+            <label for="low-stock-threshold">低库存预警阈值：</label>
+            <input type="number" id="low-stock-threshold" required><br>
+            <input type="submit" value="添加食材" onclick="addIngredient()">
+        </form>
+        <div id="purchase-list"></div>
+        <form id="add-purchase-form">
+            <label for="purchase-ingredient-id">食材 ID：</label>
+            <select id="purchase-ingredient-id" required></select><br>
+            <label for="purchase-quantity">采购数量：</label>
+            <input type="number" id="purchase-quantity" required><br>
+            <label for="purchase-supplier-id">供应商 ID：</label>
+            <select id="purchase-supplier-id" required></select><br>
+            <input type="submit" value="添加采购记录" onclick="addPurchase()">
+        </form>
+    </section>
+</main>
+<script src="merchant-scripts.js"></script>
+</body>
+
+</html>

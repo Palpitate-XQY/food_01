@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>点餐系统</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>点餐系统</h1>
+</header>
+<nav>
+  <ul>
+    <li><a href="#" onclick="showSection('login')">登录</a></li>
+    <li><a href="#" onclick="showSection('register')">注册</a></li>
+    <li><a href="#" onclick="showSection('menus')" id="menusLink" style="display: none;">菜单</a></li>
+    <li><a href="#" onclick="showSection('orders')" id="ordersLink" style="display: none;">我的订单</a></li>
+  </ul>
+</nav>
+<main id="main-content">
+  <!-- 登录页面 -->
+  <section id="login" class="section">
+    <h2>登录</h2>
+    <form id="loginForm">
+      <label for="login-username">用户名：</label>
+      <input type="text" id="login-username" required><br>
+      <label for="login-password">密码：</label>
+      <input type="password" id="login-password" required><br>
+      <input type="submit" value="登录">
+    </form>
+  </section>
+  <!-- 注册页面 -->
+  <section id="register" class="section" style="display: none;">
+    <h2>注册</h2>
+    <form id="registerForm">
+      <label for="register-username">用户名：</label>
+      <input type="text" id="register-username" required><br>
+      <label for="register-password">密码：</label>
+      <input type="password" id="register-password" required><br>
+      <label for="register-phone">联系电话：</label>
+      <input type="text" id="register-phone" required><br>
+      <input type="submit" value="注册">
+    </form>
+  </section>
+  <!-- 菜单页面 -->
+  <section id="menus" class="section" style="display: none;">
+    <h2>菜单</h2>
+    <div id="menu-list"></div>
+    <div id="cart">
+      <h3>购物车</h3>
+      <ul id="cart-items"></ul>
+      <p id="total-price">总价：￥0.00</p>
+      <button onclick="checkout()">下单</button>
+    </div>
+  </section>
+  <!-- 订单页面 -->
+  <section id="orders" class="section" style="display: none;">
+    <h2>我的订单</h2>
+    <div id="order-list"></div>
+  </section>
+</main>
+<script src="scripts.js"></script>
+</body>
+</html>
